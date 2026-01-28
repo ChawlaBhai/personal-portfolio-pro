@@ -5,8 +5,11 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Sahaj Chawla | Majdoor",
+    title: "Sahaj Chawla | Chai-paglu",
     description: "2x Founder. Majdoor. Building the next big thing.",
+    icons: {
+        icon: "/logo.png",
+    },
 };
 
 export default function RootLayout({

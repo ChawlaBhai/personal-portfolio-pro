@@ -4,6 +4,7 @@ import { useState } from "react";
 import ScrollyCanvas from "@/components/ScrollyCanvas";
 import Overlay from "@/components/Overlay";
 import ContactSection from "@/components/ContactSection";
+import Logo from "@/components/Logo";
 
 export default function Home() {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -16,6 +17,7 @@ export default function Home() {
         to scrub through the sequence.
       */}
             <div className="relative h-[1000vh]">
+                <Logo />
                 <ScrollyCanvas onLoaded={() => setIsLoaded(true)} />
                 <Overlay startAnimation={isLoaded} />
             </div>
