@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ScrollyCanvas from "@/components/ScrollyCanvas";
+import ScrollyVideo from "@/components/ScrollyVideo";
 import Overlay from "@/components/Overlay";
 import ContactSection from "@/components/ContactSection";
 import Logo from "@/components/Logo";
@@ -18,7 +18,7 @@ export default function Home() {
       */}
             <div className="relative h-[1000vh]">
                 <Logo />
-                <ScrollyCanvas onLoaded={() => setIsLoaded(true)} />
+                <ScrollyVideo onLoaded={() => setIsLoaded(true)} />
                 <Overlay startAnimation={isLoaded} />
             </div>
 
