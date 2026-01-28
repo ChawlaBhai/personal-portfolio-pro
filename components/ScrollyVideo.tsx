@@ -66,8 +66,6 @@ export default function ScrollyVideo({ onLoaded }: ScrollyVideoProps) {
         return () => cancelAnimationFrame(animationFrameId);
     }, []);
 
-    loop();
-    return () => cancelAnimationFrame(animationFrameId);
 }, []);
 
 return (
