@@ -51,12 +51,18 @@ export default function ScrollyVideo({ onLoaded }: ScrollyVideoProps) {
                 const diff = targetTimeRef.current - video.currentTime;
 
                 // If difference is significant, move towards it
-                // Adjusted to 0.25 for a balance of smoothness and responsiveness
+                // We use a LERp factor of 0.1 for smooth inertia.
+                // CRITICAL: We check !video.seeking to avoid hammering the decoder
+                // which causes massive lag on non-keyframe videos.
                 if (Math.abs(diff) > 0.01) {
-                    video.currentTime += diff * 0.25;
+                    // Only update if not currently busy seeking (unless difference is huge, then force it)
+                    if (!video.seeking || Math.abs(diff) > 0.5) {
+                        video.currentTime += diff * 0.1;
+                    }
                 } else if (Math.abs(diff) > 0.001) {
-                    // Snap if very close
-                    video.currentTime = targetTimeRef.current;
+                    if (!video.seeking) {
+                        video.currentTime = targetTimeRef.current;
+                    }
                 }
             }
             animationFrameId = requestAnimationFrame(loop);
@@ -66,18 +72,18 @@ export default function ScrollyVideo({ onLoaded }: ScrollyVideoProps) {
         return () => cancelAnimationFrame(animationFrameId);
     }, []);
 
-}, []);
 
-return (
-    <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#121212]">
-        <video
-            ref={videoRef}
-            src="/seq_mov.mov"
-            className="absolute inset-0 h-full w-full object-cover"
-            muted
-            playsInline
-            preload="auto"
-        />
-    </div>
-);
+
+    return (
+        <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#121212]">
+            <video
+                ref={videoRef}
+                src="/seq_mov.mov"
+                className="absolute inset-0 h-full w-full object-cover"
+                muted
+                playsInline
+                preload="auto"
+            />
+        </div>
+    );
 }
