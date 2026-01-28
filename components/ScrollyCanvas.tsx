@@ -3,7 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 
-export default function ScrollyCanvas() {
+interface ScrollyCanvasProps {
+    onLoaded: () => void;
+}
+
+export default function ScrollyCanvas({ onLoaded }: ScrollyCanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [images, setImages] = useState<HTMLImageElement[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -38,6 +42,7 @@ export default function ScrollyCanvas() {
             await Promise.all(promises);
             setImages(loadedImages);
             setIsLoaded(true);
+            onLoaded();
         };
 
         loadImages();

@@ -2,7 +2,11 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 
-export default function Overlay() {
+interface OverlayProps {
+    startAnimation: boolean;
+}
+
+export default function Overlay({ startAnimation }: OverlayProps) {
     const { scrollYProgress } = useScroll();
 
     // BEAT 1: INTRO (Automatic, then fade out on scroll)
@@ -39,15 +43,20 @@ export default function Overlay() {
         <div className="fixed inset-0 pointer-events-none z-10 flex flex-col justify-center items-center text-[#ededed]">
 
             {/* 🟢 BEAT 1: INTRO */}
+            {/* Wrapper for Scroll Exit */}
             <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
                 style={{ opacity: opacity1Exit, y: y1Exit }}
                 className="absolute text-center top-[35%] md:top-[40%]"
             >
-                <h1 className="text-4xl md:text-9xl font-bold tracking-tighter px-4">Sahaj Chawla</h1>
-                <p className="text-sm md:text-3xl mt-2 md:mt-4 font-light tracking-[0.5em] uppercase opacity-90">Majdoor</p>
+                {/* Inner for Entrance Animation */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+                >
+                    <h1 className="text-4xl md:text-9xl font-bold tracking-tighter px-4">Sahaj Chawla</h1>
+                    <p className="text-sm md:text-3xl mt-2 md:mt-4 font-light tracking-[0.5em] uppercase opacity-90">Chai-Paglu</p>
+                </motion.div>
             </motion.div>
 
 
@@ -154,7 +163,7 @@ export default function Overlay() {
                     {/* Bottom Item: Failed (Short) - Moved here from Left */}
                     <div>
                         <p className="text-xl font-bold text-red-500 leading-tight">Failed</p>
-                        <p className="text-sm text-gray-400 leading-tight">At 3 previous ventures</p>
+                        <p className="text-sm text-gray-400 leading-tight">At 3 other ventures</p>
                     </div>
                 </div>
 
@@ -173,7 +182,7 @@ export default function Overlay() {
                 {/* Bottom Left */}
                 <div className="hidden md:block absolute bottom-[20%] left-24 max-w-sm">
                     <p className="text-3xl font-bold leading-tight text-red-500">Failed</p>
-                    <p className="text-xl text-gray-400 leading-tight">At 3 previous ventures</p>
+                    <p className="text-xl text-gray-400 leading-tight">At 3 other ventures</p>
                 </div>
 
                 {/* Top Right */}

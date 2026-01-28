@@ -7,7 +7,7 @@ export default function ContactSection() {
         <section className="relative z-20 min-h-screen bg-black flex flex-col items-center justify-between py-8 md:py-12 overflow-hidden">
 
             {/* TOP: "As never seen on" Marquee - Slimmer & No Top Gap */}
-            <div className="w-full flex flex-col items-center gap-2 opacity-40 hover:opacity-100 transition-opacity duration-500">
+            <div className="w-full flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity duration-500">
                 <p className="uppercase tracking-[0.3em] text-[10px] md:text-xs text-gray-500">
                     As <span className="text-red-500 font-bold">never</span> seen on
                 </p>
@@ -15,13 +15,13 @@ export default function ContactSection() {
                 {/* Infinite Marquee */}
                 <div className="w-full overflow-hidden flex relative mask-linear-fade">
                     <motion.div
-                        className="flex gap-16 md:gap-32 whitespace-nowrap items-center"
+                        className="flex whitespace-nowrap items-center"
                         animate={{ x: ["0%", "-50%"] }}
                         transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
                     >
-                        {/* Repeated list for seamless loop */}
+                        {/* Repeated list for seamless loop - Removed parent gap, added pr-16/32 to items */}
                         {[...Array(2)].map((_, i) => (
-                            <div key={i} className="flex gap-16 md:gap-32 items-center text-lg md:text-2xl font-bold text-gray-700 select-none">
+                            <div key={i} className="flex gap-16 md:gap-32 items-center text-lg md:text-2xl font-bold text-gray-700 select-none pr-16 md:pr-32">
                                 <span className="font-serif">Forbes India</span>
                                 <span className="font-sans tracking-tighter">YOURSTORY</span>
                                 <span className="font-serif italic">Mint</span>
@@ -49,7 +49,7 @@ export default function ContactSection() {
                     {/* The bold 69 request */}
                     <a href="tel:+917007162269" className="hover:text-white transition-colors duration-300">
                         <span>+91 70071622</span>
-                        <span className="font-bold text-white">69</span>
+                        <span className="text-white">69</span>
                     </a>
                 </div>
 
